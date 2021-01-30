@@ -32,6 +32,11 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+    {% for item in data %}
+    <p>
+        <h2>{{item[1]}}</h2>
+    </p>
+    {% endfor %}
 </body>
 
 </html>

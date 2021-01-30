@@ -1,5 +1,6 @@
 from flask import Flask,redirect,url_for,render_template,request
 from flask_mysqldb import MySQL
+from flask import jsonify
 app=Flask(__name__)
 
 app.config["MYSQL_HOST"]="localhost"
@@ -20,7 +21,19 @@ def my_form_post():
     cur.execute("INSERT INTO mytable(name)VALUES(%s)",(text,))
     mysql.connection.commit()
     cur.close()
-    return render_template("index.html")
+    response=jsonify(text)
+    return response
+
+@app.route("/name",methods=["GET"])
+def my_form_get():
+    sql_select_Query="SELECT * FROM mytable"
+    cur=mysql.connection.cursor()
+    cur.execute(sql_select_Query)
+    data=cur.fetchall()
+    for row in data:
+        print(row[1])  
+    response=jsonify(data)             
+    return response
 
 if __name__=="__main__":
     app.run()    
