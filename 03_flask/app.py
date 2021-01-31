@@ -21,7 +21,7 @@ def my_form_post():
     cur.execute("INSERT INTO mytable(name)VALUES(%s)",(text,))
     mysql.connection.commit()
     cur.close()
-    response=jsonify(text)
+    response=jsonify("value added successfully")
     return response
 
 @app.route("/name",methods=["GET"])
