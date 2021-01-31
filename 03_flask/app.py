@@ -30,6 +30,7 @@ def my_form_get():
     cur=mysql.connection.cursor()
     cur.execute(sql_select_Query)
     data=cur.fetchall()
+    
     for row in data:
         print(row[1])  
     response=jsonify(data)             
